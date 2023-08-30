@@ -1,5 +1,7 @@
 import express, { Express, Request, Response , Application } from 'express';
 import dotenv from 'dotenv';
+import cors from 'cors';
+import expressValidator from 'express-validator';
 dotenv.config();
 import env from '../endpoints.config'
 import { Database } from './providers/database';
@@ -12,11 +14,18 @@ const app: Application = express();
 
 const port = env.port || 8000;
 
+const allowedOrigins = ['http://localhost:5000'];
+
+const corsOptions: cors.CorsOptions = {
+  origin: allowedOrigins
+};
+
 app.use(bodyParser.urlencoded({ extended: false }))
+app.use(cors(corsOptions))
 app.use(passport.initialize())
 // parse application/json
 app.use(bodyParser.json())
-//routes    
+//routes
 app.use("/user", userRouter)
 
 

@@ -18,7 +18,7 @@ class Login{
             const tokens = tokenService.signTokens(user._id, user.email);
             user.refreshToken = tokens.refreshToken;
             await user.save();
-            return res.status(200).json({msg:"user logined", accessToken:tokens.accessToken});
+            return res.status(200).json({msg:"user logined", accessToken:tokens.accessToken, user:user});
         }
     }
 }

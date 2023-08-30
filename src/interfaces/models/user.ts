@@ -7,7 +7,7 @@ export interface UserDoc extends mongoose.Document {
     email: string,
     password: string,
     refreshToken:string
-};
+}
 
 const UserSchema: mongoose.Schema<UserDoc> = new Schema({
     email: { type: String, unique: true },
