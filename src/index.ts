@@ -8,11 +8,14 @@ import { Database } from './providers/database';
 import userRouter from './routes/user';
 import bodyParser from 'body-parser';
 import passport from '@App/services/passport/strategies/PassportJWT';
+import Stripe from 'stripe';
+
 //For env File 
 
 const app: Application = express();
 
 const port = env.port || 8000;
+
 
 const allowedOrigins = ['http://localhost:5000'];
 
