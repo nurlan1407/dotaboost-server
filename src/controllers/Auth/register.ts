@@ -17,11 +17,15 @@ class Register{
             if(password!==confirmationPassword){
                 return res.status(400).json({msg:"Passwords are not matching"});
             }
+            if(await userService.findUser(email)){
+                return res.status(400).json({msg:"User already exists"});
+            }
             const user = await UserModel.findOne({email:email});
             if(user != null){
                 return res.status(400).json({msg:`user ${user.email} already exists`});
             }else{
                 const newUser =await userService.insertUser(email,password);
+                console.log(newUser);
                 if(newUser){
                     const tokens = tokenService.signTokens(newUser._id, newUser.email);
                     newUser.refreshToken = tokens.refreshToken;

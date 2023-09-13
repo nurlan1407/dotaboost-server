@@ -6,9 +6,8 @@ export const differentUserId = new mongoose.Types.ObjectId().toString();
 
 export const userInput = {
     email: "test@example.com",
-    name: "Test User",
     password: "Asdf123$",
-    passwordConfirmation: "Asdf123$",
+    confirmationPassword: "Asdf123$",
 };
 
 export const credInput = {
@@ -19,7 +18,6 @@ export const credInput = {
 export const userPayload = {
     _id: userId,
     email: "test@example.com",
-    name: "Test User",
 };
 
 export const differentUserPayload = {

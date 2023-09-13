@@ -5,11 +5,10 @@ import { MongoError } from "mongodb"
 
 
 export class Database {
-    public static async init() {
-        console.log(env.dbUrl)
+    public static init() {
         const dbUrl = env.dbUrl ;
         const options = { useNewUrlParser: true, useUnifiedTopology: true };
-        await mongoose.connect(dbUrl!!)
+        mongoose.connect(dbUrl!!)
             .then(() => {
                 console.log('connected to mongo server at: ' + dbUrl);
             }).catch((error: MongoError) => {

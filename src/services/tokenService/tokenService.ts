@@ -27,9 +27,19 @@ class TokenService{
         return {accessToken:accessToken, refreshToken:refreshToken}
     }
 
+    decodeAccessToken(accessToken:string){
+        const decoded = jwt.verify(accessToken,TOKEN_KEY);
+        console.log(decoded);
+        return decoded
+    }
+
+    auth(token:string){
+        return jwt.verify(token,TOKEN_KEY)
+    }
     refreshToken(){
         
     }
+
 }
 
 const tokenService = new TokenService()

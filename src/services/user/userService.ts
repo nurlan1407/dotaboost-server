@@ -5,9 +5,12 @@ class UserService{
         return await UserModel.create({email: email, password: password});
     }
     async setRefreshToken(user:UserDoc){
-        return await user.save()
+        return await user.save();
     }
 
+    async findUser(email:string){
+        return await UserModel.findOne({email:email});
+    }
 }
 
 

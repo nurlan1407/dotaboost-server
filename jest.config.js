@@ -8,5 +8,5 @@ module.exports = {
     "@App/*": [
       "src/*"
     ]
-  })
+  }),
 };

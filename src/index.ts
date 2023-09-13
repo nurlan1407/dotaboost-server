@@ -13,10 +13,11 @@ import {paymentRouter} from "./routes/payment";
 
 //For env File 
 
-const app: Application = express();
+export const app: Application = express();
 
+const host = "0.0.0.0";
 const port = env.port || 8000;
-const DbUrl = env.dbUrl || ""
+const DbUrl = env.dbUrl || "";
 
 
 const allowedOrigins = ['http://localhost:5000'];
@@ -39,11 +40,8 @@ app.get('/', (req: Request, res: Response) => {
 }); 
 
 
-
-const server = app.listen(port, async() => {
-  await Database.init()
-  console.log(`Server is Fire at http://localhost:${port}`);
-});
-
-export default server;
+// app.listen(port, () => {
+//    Database.init()
+//   console.log(`Server is Fire at http://localhost:${port}`);
+// });
 
