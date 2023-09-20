@@ -25,7 +25,7 @@ class Register{
                 return res.status(400).json({msg:`user ${user.email} already exists`});
             }else{
                 const newUser =await userService.insertUser(email,password);
-                console.log(newUser);
+                // console.log(newUser);
                 if(newUser){
                     const tokens = tokenService.signTokens(newUser._id, newUser.email);
                     newUser.refreshToken = tokens.refreshToken;

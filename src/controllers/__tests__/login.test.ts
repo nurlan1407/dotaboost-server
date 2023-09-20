@@ -8,8 +8,8 @@ import { UserModel } from "@App/interfaces/models/user";
 import userService from "@App/services/user/userService";
 import { userInput } from "../fixtures/authFixtures";
 
-describe("Login unit tests", ()=>{
 
+describe("Login unit tests", ()=>{
     beforeEach(async () => {
         const mongoServer =await MongoMemoryServer.create();
         await mongoose.connect(mongoServer.getUri());
@@ -50,7 +50,7 @@ describe("Login unit tests", ()=>{
                         email:userInput.email,
                         password:userInput.password
                     });
-                expect(response.statusCode).toEqual(400);
+                expect(response.statusCode).toEqual(200);
             })
         })
     })

@@ -1,15 +1,14 @@
 import mongoose, { Schema } from "mongoose";
 
 export interface Product extends mongoose.Document{
-    productId:mongoose.Schema.Types.ObjectId,
     serviceId:number,
     name:string,
     price:number,
-    imgUrl:string|null
+    imgUrl:string|null,
+    amount:number
 };
 
 const ProductSchema:mongoose.Schema<Product> = new Schema({
-    productId:{type:mongoose.Schema.Types.ObjectId},
     serviceId:{type:Number},
     name:{type:String},
     price:{type:Number},
@@ -17,6 +16,11 @@ const ProductSchema:mongoose.Schema<Product> = new Schema({
         type:String,
         required:false,
         default:null
+    },
+    amount:{
+        type:Number,
+        required:false,
+        default:1
     }
 });
 
