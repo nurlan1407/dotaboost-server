@@ -22,16 +22,16 @@ class PaypalPayment {
                 password:password
             }
             const order = await OrderModel.findById(orderId)
-            console.log(order);
+            // console.log(order);
             
             if(!order){
-                console.log("no order found");
+                // console.log("no order found");
                 return res.json({msg:"No order found"}).status(400);
             }
             //@ts-ignore
             const product = await ProductModel.findOne(order.product.productId);
             if(!product){
-                console.log("no product, try late");
+                // console.log("no product, try late");
                 return res.json({msg:"no product, try later"}).status(400);
             }
             const request = new paypal.orders.OrdersCreateRequest();
@@ -43,13 +43,13 @@ class PaypalPayment {
                         amount: {
                             currency_code: "USD",
                             value: `${product.price*order.product.amount}`
-                        },
-                    }
-                ]
+                        },        
+                    },
+                ],
             });
             const PaypalOrder = await client.execute(request);
-            console.log(order);
-            console.log(PaypalOrder.result.id);
+            // console.log(order);
+            // console.log(PaypalOrder.result.id);
 
             const payment:Payment={
                 transactionId:PaypalOrder.result.id,
@@ -70,8 +70,29 @@ class PaypalPayment {
     }
 
     public static async paymentComplete(req: Request, res: Response, next: NextFunction){
+        const {orderId} = req.params;
+        console.log(orderId);
         
+        const order = await OrderModel.findById(orderId);
+        console.log(order);
+        
+        if(!order){
+            return res.json({msg:"could not pay sorry"}).status(404);
+        }
+        if(order.payment.status=="Payed"){
+            return res.json({msg:"Order already payed"}).status(404);
+        }
+        console.log(order);
+        
+        order.orderNumber = order.orderNumber - 1 ;//because i have middleware that increments orderNumber when i save()
+        order.payment.status = "Payed";
+        await order.save();
+        return res.json({msg:"success"}).status(200);
     }
+
+    // public static async paymentRejects(req: Request, res: Response, next: NextFunction){
+    //     return res.
+    // }
 }
 
 export default PaypalPayment;

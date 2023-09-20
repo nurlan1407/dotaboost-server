@@ -8,5 +8,6 @@ const orderRouter = Router();
 orderRouter.get("/get/:orderId", GetOrder.perform);
 orderRouter.post("/create", CreateOrder.perform);
 orderRouter.post("/payment/create",PaypalPayment.createOrder);
+orderRouter.post("/payment/capture/:orderId", PaypalPayment.paymentComplete);
 
 export default orderRouter;
