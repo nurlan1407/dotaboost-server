@@ -5,4 +5,4 @@ import passport from "@App/services/passport/strategies/PassportJWT";
 
 
 export const paymentRouter = Router();
-paymentRouter.post("/create-payment-intent",passport.authenticate("jwt-strategy", {session:false}), PaymentIntent.perform);
+//  

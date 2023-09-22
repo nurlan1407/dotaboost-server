@@ -1,5 +1,6 @@
 export default{
     port: process.env.PORT,
+    serverUrl: process.env.SERVER_URL,
     dbUsername: process.env.DBUSERNAME,
     dbUrl: process.env.DB_URL,
     stripeSecretKey: process.env.STRIPE_SECRET_KEY,

@@ -13,7 +13,7 @@ class Register{
             }
             const email:string = req.body.email;
             const password:string = req.body.password;
-            const confirmationPassword = req.body.confirmationPassword;
+            const confirmationPassword = req.body.repeatPassword;
             if(password!==confirmationPassword){
                 return res.status(400).json({msg:"Passwords are not matching"});
             }
