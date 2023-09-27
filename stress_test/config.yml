@@ -1,0 +1,10 @@
+config:
+  target: 'http://localhost:3000' # Замените на URL вашего Express-сервера
+  phases:
+    - duration: 60 # Продолжительность теста в секундах
+      arrivalRate: 5 # Количество пользователей, появляющихся в секунду
+  # processor: './customProcessor.js' # Опциональный процессор для обработки результатов
+scenarios:
+  - flow:
+      - get:
+          url: '/'

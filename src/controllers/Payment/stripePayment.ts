@@ -12,10 +12,6 @@ class StripePayment{
     public static async InitiateStripePayment(req:Request,res:Response,next:NextFunction){
         try{
             const SERVER_URL = env.serverUrl;
-            const errors = validationResult(req);
-            if(!errors.isEmpty()){
-                return res.status(400).json({msg:"invalid credentials"});
-            };
             const { fromMMR, toMMR } = req.body;
             const {orderId, email, steamId ,password} = req.body; 
             
@@ -45,13 +41,14 @@ class StripePayment{
                             product_data:{
                                 name:product.name
                             },
-                            unit_amount: (order.product.amount * product.price) * 1000
+                            unit_amount: (order.product.amount * product.price) * 100
                         },
                         quantity:order.product.amount       
                     }
                 ],
                 success_url:`${SERVER_URL}/order/payment/stripe/catch/${orderId}`, //change the payment status of order
                 cancel_url:SERVER_URL, 
+                
             });
             
             const payment:Payment={
@@ -73,14 +70,13 @@ class StripePayment{
     public static async CatchPayment(req:Request,res:Response,next:NextFunction){
         try{
             const orderId = req.params;
-            const order = await OrderModel.findByIdAndUpdate(orderId,{
-                payment:{
-                    status:"Payed"
-                }
-            });
+            const order = await OrderModel.findOne({_id:orderId});
             if(!order){
                 return res.json({msg:"no order found"}).status(400);
             }
+            order.payment.status = "Payed";
+            order.orderNumber = order.orderNumber -1;
+            await order.save();
             return res.json({msg:"success"}).status(200);
         }catch(e){
             return next(e);

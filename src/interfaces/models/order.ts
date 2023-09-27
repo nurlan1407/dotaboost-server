@@ -8,7 +8,8 @@ export type PaymentMethod = "Paypal"|"Stripe"
 export type Payment={
     paymentMethod: PaymentMethod,     // Payment method used, e.g., "PayPal", "Credit Card"
     transactionId: String,     // Payment transaction ID or reference
-    status: PaymentStatus  
+    status: PaymentStatus,
+    
 };
 
 export type AccountCredentials={

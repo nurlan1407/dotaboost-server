@@ -13,9 +13,6 @@ orderRouter.post("/create", CreateOrder.perform);
 orderRouter.post("/addCredentials", AddCredentials.perform);
 
 orderRouter.post("/payment/create/:orderId",
-    body("email").not().isEmpty(),
-    body("password").not().isEmpty(),
-    body("steamId").not().isEmpty(),
     PaypalPayment.createOrder
     );
 
@@ -24,9 +21,6 @@ orderRouter.post("/payment/capture/:orderId",
 );
 
 orderRouter.post("/payment/stripe/create",
-    body("email").not().isEmpty(),
-    body("password").not().isEmpty(),
-    body("steamId").not().isEmpty(),
     StripePayment.InitiateStripePayment
 );
 
