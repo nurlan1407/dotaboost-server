@@ -4,12 +4,12 @@
 
 
 ## my api collection
-![screenshot 1](./public/stress_test_1.jpg)
+![screenshot 1](./src/public/assets/stress_test_1.jpg)
 
 
 ## stress test results:
 
 ### there are fails in register because it registers the same user and validation is not passing
-![reuslt ](./public/stress_test_1.jpg)
+![reuslt ](./src/public/assets/stress_test_2.jpg)
 
 ### average response: 320ms
